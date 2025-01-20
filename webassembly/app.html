@@ -17,6 +17,13 @@
 
 <body>
   <section class="section">
+    <div class="notification is-warning">
+    <button class="delete"></button>
+    This web application is experimental and currently not well tested.
+    It's deployed continuously and can break at anytime.
+    Don't hesitate to reach out on <a href="https://discord.f3d.app">Discord</a>
+    if it's currently not working or if you want to contribute.
+  </div>
     <div class="columns">
       <div class="column">
         <h1 class="title">F3D Web</h1>
@@ -87,6 +94,15 @@
   <script type="text/javascript" src="f3d.js"></script>
   <script type="text/javascript">
 
+    // remove warning when delete button is clicked
+    (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+      const $notification = $delete.parentNode;
+
+      $delete.addEventListener('click', () => {
+        $notification.parentNode.removeChild($notification);
+      });
+    });
+
     const settings = {
       canvas: document.getElementById("canvas"),
       setupOptions: (options) => {
@@ -106,7 +122,7 @@
         options.toggle('render.hdri.ambient');
 
         // display widgets
-        options.toggle('interactor.axis');
+        options.toggle('ui.axis');
         options.toggle('render.grid.enable');
 
         // default to +Z
@@ -119,19 +135,16 @@
         // automatically load all supported file format readers
         Module.Engine.autoloadPlugins();
 
-        Module.engineInstance = new Module.Engine();
+        Module.engineInstance = Module.Engine.create()
 
         const openFile = (name) => {
           document.getElementById('file-name').innerHTML = name;
           const filePath = '/' + name;
-          const loader = Module.engineInstance.getLoader();
-          if (loader.hasSceneReader(filePath))
+          const scene = Module.engineInstance.getScene();
+          if (scene.supports(filePath))
           {
-            loader.loadScene(filePath);
-          }
-          else if (loader.hasGeometryReader(filePath))
-          {
-            loader.loadGeometry(filePath);
+            scene.clear();
+            scene.add(filePath);
           }
           else
           {
@@ -166,7 +179,7 @@
         };
 
         mapToggleIdToOption('grid', 'render.grid.enable');
-        mapToggleIdToOption('axis', 'interactor.axis');
+        mapToggleIdToOption('axis', 'ui.axis');
         mapToggleIdToOption('fxaa', 'render.effect.anti_aliasing');
         mapToggleIdToOption('tone', 'render.effect.tone_mapping');
         mapToggleIdToOption('ssao', 'render.effect.ambient_occlusion');
