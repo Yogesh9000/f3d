@@ -49,11 +49,17 @@ Classes
 
 - :ref:`exhale_struct_structf3d_1_1interactor_1_1does__not__exists__exception`
 
+- :ref:`exhale_struct_structf3d_1_1interactor_1_1invalid__args__exception`
+
 - :ref:`exhale_struct_structf3d_1_1mesh__t`
 
 - :ref:`exhale_struct_structf3d_1_1point3__t`
 
 - :ref:`exhale_struct_structf3d_1_1scene_1_1load__failure__exception`
+
+- :ref:`exhale_struct_structf3d_1_1type__access__exception`
+
+- :ref:`exhale_struct_structf3d_1_1type__construction__exception`
 
 - :ref:`exhale_struct_structf3d_1_1utils_1_1string__template_1_1lookup__error`
 
@@ -63,7 +69,15 @@ Classes
 
 - :ref:`exhale_class_classf3d_1_1camera`
 
+- :ref:`exhale_class_classf3d_1_1color__t`
+
+- :ref:`exhale_class_classf3d_1_1colormap__t`
+
 - :ref:`exhale_class_classf3d_1_1context`
+
+- :ref:`exhale_class_classf3d_1_1direction__t`
+
+- :ref:`exhale_class_classf3d_1_1double__array__t`
 
 - :ref:`exhale_class_classf3d_1_1engine`
 
